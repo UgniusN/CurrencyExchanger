@@ -10,7 +10,7 @@ import Select from '@material-ui/core/Select';
 import { TextField } from 'formik-material-ui'
 import fetchApi from '../api/fetchApi'
 import {useEffect,useState} from 'react';
-
+import './structure.css';
 
 export default() => {
 
@@ -78,19 +78,21 @@ export default() => {
             <Formik initialValues={initialState}
                         onSubmit={values=> {
                           fetchApi.exchangeCurrency(startCurrency,endCurrency,values).then(response => setExchangedCurrency(response.data)) 
-                        }}>
+                        }}
+                        >
               {(props) => (
                 <Form>
                   <div>
-                    <Field name="user" type="text" component={TextField} />
+                    <Field name="user" type="text" component={TextField} placeholder="Amount" required="true" onBlur/>
                   </div>
                   <div>
-                  <FormControl className={classes.formControl}>     
+                  <FormControl className={classes.formControl}>    
                     <InputLabel id="demo-simple-select-label">Start currency</InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={startCurrency}
+                        required="true"
                         onChange={handleChangeFromCurrency}
                       >
                         {currenciesFrom}
@@ -103,6 +105,7 @@ export default() => {
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
                         value={endCurrency}
+                        required="true"
                         onChange={handleChangeToCurrency}
                       >
                         {currenciesTo}
@@ -113,7 +116,8 @@ export default() => {
                 </Form>
               )}
             </Formik>
-            {exchangedCurrency.rate}
+            <div className="exchanged">Exchanged</div>
+            {exchangedCurrency.rate} {exchangedCurrency.currency}
         </div>
     )
 

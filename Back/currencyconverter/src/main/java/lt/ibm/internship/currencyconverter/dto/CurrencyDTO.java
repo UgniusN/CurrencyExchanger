@@ -1,17 +1,39 @@
 package lt.ibm.internship.currencyconverter.dto;
 
-import lombok.Data;
-import lt.ibm.internship.currencyconverter.entities.Currency;
-
-@Data
 public class CurrencyDTO {
 
-    private String currency;
+    private final String currency;
+    private final double rate;
 
-    private Double rate;
+    private CurrencyDTO(Builder builder) {
+        this.currency = builder.currency;
+        this.rate = builder.rate;
+    }
 
-    public CurrencyDTO(Currency currency) {
-        this.currency = currency.getCurrency();
-        this.rate = currency.getRate();
+    public static class Builder {
+        private String currency;
+        private Double rate;
+
+        public Builder currency(final String currency) {
+            this.currency = currency;
+            return this;
+        }
+
+        public Builder rate(final double rate) {
+            this.rate = rate;
+            return this;
+        }
+
+        public CurrencyDTO build() {
+            return new CurrencyDTO(this);
+        }
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public double getRate() {
+        return rate;
     }
 }

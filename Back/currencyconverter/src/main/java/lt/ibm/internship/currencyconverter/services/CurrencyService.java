@@ -21,12 +21,8 @@ public class CurrencyService {
     private CalculationService calculationService;
 
     public void updateCurrencies() {
-        // stream
         List<Currency> currencies = currencyFetcher.fetchCurrencies();
-        currencies.stream().map(currency -> currencyRepository.save(currency));
-//        for(Currency currency : currencies) {
-//            currencyRepository.save(currency);
-//        }
+        currencies.stream().forEach(currency -> currencyRepository.save(currency));
     }
 
     public List<Currency> getCurrencies() {

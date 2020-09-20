@@ -1,9 +1,12 @@
 package lt.ibm.internship.currencyconverter.entities;
 
 import lt.ibm.internship.currencyconverter.models.Calculator;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+@Component
 public class CurrencyCalculator implements Calculator {
 
     @Override

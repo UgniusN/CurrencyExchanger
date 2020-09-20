@@ -1,40 +1,19 @@
 package lt.ibm.internship.currencyconverter.services;
 
 import lt.ibm.internship.currencyconverter.entities.Currency;
-import lt.ibm.internship.currencyconverter.fetchers.CurrencyFetcher;
-import lt.ibm.internship.currencyconverter.repositories.CurrencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class CurrencyService {
+public interface CurrencyService {
 
-    @Autowired
-    private CurrencyRepository currencyRepository;
+    void updateCurrencies();
 
-    @Autowired
-    private CurrencyFetcher currencyFetcher;
+    List<Currency> getCurrencies();
 
-    @Autowired
-    private CalculationService calculationService;
+    Optional<Currency> getCurrencyById(String currencyTitle);
 
-    public void updateCurrencies() {
-        List<Currency> currencies = currencyFetcher.fetchCurrencies();
-        currencies.stream().forEach(currency -> currencyRepository.save(currency));
-    }
+    Currency getCalculatedCurrency(String currencyFrom, String currencyTo, double amountTo);
 
-    public List<Currency> getCurrencies() {
-        List<Currency> currencies = currencyRepository.findAll();
-        return currencies;
-    }
-
-    public Optional<Currency> getCurrencyById(String currencyTitle) {
-        return currencyRepository.findById(currencyTitle);
-    }
-
-    public Currency getCalculatedCurrency(Currency currencyFrom, Currency currencyTo, double amountTo) {
-        return calculationService.getExchangedCurrency(currencyFrom,currencyTo,amountTo);
-    }
 }

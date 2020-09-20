@@ -1,6 +1,7 @@
 package lt.ibm.internship.currencyconverter.entities;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.Column;
@@ -12,12 +13,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "currencies")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Currency {
-
-    public Currency(String currency, Double rate) {
-        this.currency = currency;
-        this.rate = rate;
-    }
 
     @Id
     @Column(name = "currency")

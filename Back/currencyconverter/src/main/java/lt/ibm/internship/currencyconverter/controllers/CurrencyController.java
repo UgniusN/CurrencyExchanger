@@ -1,36 +1,30 @@
 package lt.ibm.internship.currencyconverter.controllers;
 
+import lombok.AllArgsConstructor;
 import lt.ibm.internship.currencyconverter.dto.CurrencyDTO;
 import lt.ibm.internship.currencyconverter.entities.Currency;
 import lt.ibm.internship.currencyconverter.services.CurrencyService;
-import lt.ibm.internship.currencyconverter.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
+@AllArgsConstructor
 public class CurrencyController {
 
-    @Autowired
     private CurrencyService currencyService;
-
-    @Autowired
-    private MessageService messageService;
 
     @GetMapping
     public List<CurrencyDTO> getAllCurrencies() {
         currencyService.updateCurrencies();
-        List<CurrencyDTO> currencyDTOList = new ArrayList<>();
-        currencyService.getCurrencies()
-                        .stream()
-                        .forEach(currency -> currencyDTOList.add(new CurrencyDTO.Builder().rate(currency.getRate())
-                                                                                      .currency(currency.getCurrency())
-                                                                                      .build()));
+        List<Currency> currencies = currencyService.getCurrencies();
+        List<CurrencyDTO> currencyDTOList = currencies.stream()
+                .map(currency -> {
+                    return CurrencyDTO.builder().currency(currency.getCurrency()).rate(currency.getRate()).build();
+                        }).collect(Collectors.toList());
         return currencyDTOList;
     }
 
@@ -39,11 +33,8 @@ public class CurrencyController {
                                             @RequestParam(name = "CurrencyTo") String currencyTo,
                                             @RequestParam(name = "CurrencyToAmount") Double currencyToAmount)
     {
-        Currency fromCurrency = currencyService.getCurrencyById(currencyFrom).get();
-        Currency toCurrency = currencyService.getCurrencyById(currencyTo).get();
-        Currency convertedCurrency = currencyService.getCalculatedCurrency(fromCurrency,toCurrency,currencyToAmount);
-        messageService.saveUserExchangeAction(fromCurrency,toCurrency,currencyToAmount,convertedCurrency);
-        return new CurrencyDTO.Builder().currency(convertedCurrency.getCurrency())
+        Currency convertedCurrency = currencyService.getCalculatedCurrency(currencyFrom,currencyTo,currencyToAmount);
+        return CurrencyDTO.builder().currency(convertedCurrency.getCurrency())
                                         .rate(convertedCurrency.getRate())
                                         .build();
     }

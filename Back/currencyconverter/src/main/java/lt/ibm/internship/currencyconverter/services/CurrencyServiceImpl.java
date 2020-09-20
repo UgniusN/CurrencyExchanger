@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lt.ibm.internship.currencyconverter.entities.Currency;
 import lt.ibm.internship.currencyconverter.fetchers.lb_fetcher.LbFetcher;
 import lt.ibm.internship.currencyconverter.repositories.CurrencyRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,13 +17,19 @@ public class CurrencyServiceImpl implements CurrencyService{
 
     private LbFetcher lbFetcher;
 
-    private CalculationServiceImpl calculationService;
+    private CalculationService calculationService;
 
-    private MessageServiceImpl messageService;
+    private MessageService messageService;
 
     public void updateCurrencies() {
-        List<Currency> currencies = lbFetcher.fetchCurrencies();
-        currencies.stream().forEach(currency -> currencyRepository.save(currency));
+        List<Currency> currenciesFromAPI = lbFetcher.fetchCurrencies();
+        List<Currency> currenciesFromDB = currencyRepository.findAll();
+        List<Currency> union = new ArrayList<Currency>(currenciesFromAPI);
+        union.addAll(currenciesFromDB);
+        List<Currency> intersection = new ArrayList<Currency>(currenciesFromAPI);
+        intersection.retainAll(currenciesFromDB);
+        union.removeAll(intersection);
+        union.stream().forEach(currency -> currencyRepository.save(currency));
     }
 
     public List<Currency> getCurrencies() {
@@ -35,8 +41,8 @@ public class CurrencyServiceImpl implements CurrencyService{
         return currencyRepository.findById(currencyTitle);
     }
 
-
     public Currency getCalculatedCurrency(String currencyFrom, String currencyTo, double amountTo) {
+        updateCurrencies();
         Currency fromCurrency = currencyRepository.findById(currencyFrom).orElseThrow();
         Currency toCurrency = currencyRepository.findById(currencyTo).orElseThrow();
         Currency convertedCurrency = calculationService.getExchangedCurrency(fromCurrency,toCurrency,amountTo);

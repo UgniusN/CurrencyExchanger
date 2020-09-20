@@ -83,7 +83,7 @@ export default() => {
               {(props) => (
                 <Form>
                   <div>
-                    <Field name="user" type="text" component={TextField} placeholder="Amount" required="true" onBlur/>
+                    <Field name="user" type="text" component={TextField} placeholder="Amount" required="true" disabled={false}/>
                   </div>
                   <div>
                   <FormControl className={classes.formControl}>    

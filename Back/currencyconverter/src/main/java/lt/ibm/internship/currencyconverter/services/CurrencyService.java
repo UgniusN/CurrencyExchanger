@@ -1,8 +1,6 @@
 package lt.ibm.internship.currencyconverter.services;
 
 import lt.ibm.internship.currencyconverter.entities.Currency;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 

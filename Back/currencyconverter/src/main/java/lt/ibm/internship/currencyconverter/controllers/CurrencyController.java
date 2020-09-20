@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lt.ibm.internship.currencyconverter.dto.CurrencyDTO;
 import lt.ibm.internship.currencyconverter.entities.Currency;
 import lt.ibm.internship.currencyconverter.services.CurrencyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

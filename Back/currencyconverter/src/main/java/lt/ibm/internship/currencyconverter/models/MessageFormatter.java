@@ -15,5 +15,4 @@ public class MessageFormatter {
         Date date = new Date();
         return format.format(date);
     }
-
 }

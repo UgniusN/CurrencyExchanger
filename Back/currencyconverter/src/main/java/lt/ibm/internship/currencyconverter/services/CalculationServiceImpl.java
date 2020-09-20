@@ -1,15 +1,13 @@
 package lt.ibm.internship.currencyconverter.services;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lt.ibm.internship.currencyconverter.entities.Currency;
 import lt.ibm.internship.currencyconverter.entities.CurrencyCalculator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class CalculationServiceImpl {
+public class CalculationServiceImpl implements CalculationService{
 
     private CurrencyCalculator currencyCalculator;
 

@@ -16,9 +16,8 @@ public final class LbFetcher extends Fetcher implements CurrencyFetcher {
         return super.getDocumentFromAPI(url);
     }
 
-    @Override
     public List<Currency> parseCurrenciesFromXML(NodeList nodeList) {
-        return super.parseCurrenciesFromXML(nodeList);
+        return super.parseFromXML(nodeList);
     }
 
     @Override

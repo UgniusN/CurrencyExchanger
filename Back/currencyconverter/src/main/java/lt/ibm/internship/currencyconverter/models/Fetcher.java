@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fetcher implements FetcherInterface, Parser{
+public class Fetcher implements FetcherInterface, Parser<Currency>{
 
     public Document getDocumentFromAPI(String url) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -36,8 +36,7 @@ public class Fetcher implements FetcherInterface, Parser{
         return doc;
     }
 
-    @Override
-    public List<Currency> parseCurrenciesFromXML(NodeList nodeList) {
+    public List<Currency> parseFromXML(NodeList nodeList) {
         List<Currency> currencyList = new ArrayList<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);

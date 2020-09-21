@@ -35,14 +35,10 @@ export default() => {
 
     const classes = useStyles();
 
-
-    
-
     const [startCurrency, setStartCurrency] = React.useState('');
 
     const [exchangedCurrency, setExchangedCurrency] = React.useState('');
  
-      
     const handleChangeFromCurrency = (event) => {
       setStartCurrency(event.target.value);
     };
@@ -70,7 +66,6 @@ export default() => {
            <MenuItem value={currencyTo.currency}>{currencyTo.currency}</MenuItem>
         )
     })
-
 
     return(
         
@@ -120,5 +115,4 @@ export default() => {
             {exchangedCurrency.rate} {exchangedCurrency.currency}
         </div>
     )
-
 }

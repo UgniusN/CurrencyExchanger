@@ -1,4 +1,4 @@
-package lt.ibm.internship.currencyconverter.fetchers.lb_fetcher;
+package lt.ibm.internship.currencyconverter.fetcher;
 
 import lt.ibm.internship.currencyconverter.entities.Currency;
 import java.util.List;

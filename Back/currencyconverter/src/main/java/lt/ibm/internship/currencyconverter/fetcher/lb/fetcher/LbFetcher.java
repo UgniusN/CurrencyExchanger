@@ -1,14 +1,15 @@
-package lt.ibm.internship.currencyconverter.fetchers.lb_fetcher;
+package lt.ibm.internship.currencyconverter.fetcher.lb.fetcher;
 
 import lt.ibm.internship.currencyconverter.entities.Currency;
-import lt.ibm.internship.currencyconverter.models.Fetcher;
+import lt.ibm.internship.currencyconverter.fetcher.CurrencyFetcher;
+import lt.ibm.internship.currencyconverter.fetcher.Fetcher;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import java.util.List;
 
 @Component
-public final class LbFetcher extends Fetcher implements CurrencyFetcher {
+public class LbFetcher extends Fetcher implements CurrencyFetcher {
     private final String URL = "https://www.lb.lt/webservices/FxRates/FxRates.asmx/getCurrentFxRates?tp=eu";
 
     @Override

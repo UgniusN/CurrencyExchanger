@@ -1,6 +1,7 @@
-package lt.ibm.internship.currencyconverter.models;
+package lt.ibm.internship.currencyconverter.fetcher;
 
 import lt.ibm.internship.currencyconverter.entities.Currency;
+import lt.ibm.internship.currencyconverter.models.Parser;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Fetcher implements FetcherInterface, Parser<Currency>{
+public abstract class Fetcher implements FetcherInterface, Parser<Currency> {
 
     public Document getDocumentFromAPI(String url) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();

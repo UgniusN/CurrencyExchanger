@@ -2,7 +2,7 @@ package lt.ibm.internship.currencyconverter.services;
 
 import lombok.AllArgsConstructor;
 import lt.ibm.internship.currencyconverter.entities.Currency;
-import lt.ibm.internship.currencyconverter.fetchers.lb_fetcher.LbFetcher;
+import lt.ibm.internship.currencyconverter.fetcher.lb.fetcher.LbFetcher;
 import lt.ibm.internship.currencyconverter.repositories.CurrencyRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;

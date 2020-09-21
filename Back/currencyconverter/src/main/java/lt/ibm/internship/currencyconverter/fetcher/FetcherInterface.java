@@ -1,4 +1,4 @@
-package lt.ibm.internship.currencyconverter.models;
+package lt.ibm.internship.currencyconverter.fetcher;
 
 import org.w3c.dom.Document;
 

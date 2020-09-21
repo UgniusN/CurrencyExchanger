@@ -13,5 +13,4 @@ public interface CurrencyService {
     Optional<Currency> getCurrencyById(String currencyTitle);
 
     Currency getCalculatedCurrency(String currencyFrom, String currencyTo, double amountTo);
-
 }
